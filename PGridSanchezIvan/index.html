@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan Sánchez - Portfolio Moodboard</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <input type="checkbox" id="toggle-tema" class="checkbox-tema" hidden>
+
+    <header class="cabecera-principal">
+        <div>
+            <h1>Ivan Sánchez</h1>
+            <p>Desarrollador Web · 1º DAM</p>
+        </div>
+        <label for="toggle-tema" class="boton label-tema"></label>
+    </header>
+
+    <main class="contenedor-grid">
+        
+        <section class="tarjeta hero">
+            <div class="linea-decorativa"></div>
+            <h2>Sobre Mí</h2>
+            <p>Estudiante de DAM con pasión por crear experiencias web modernas. Me encanta combinar creatividad y tecnología en mis proyectos.</p>
+        </section>
+
+        <figure class="tarjeta media-stack">
+            <img src="img/d6.png" alt="Vista del simulador D6">
+        </figure>
+
+        <section class="tarjeta widget-filosofia">
+            <span class="etiqueta">FILOSOFÍA</span>
+            <p class="texto-cita">"El código es como el humor. Cuando tienes que explicarlo, es malo."</p>
+        </section>
+
+        <figure class="tarjeta banner">
+            <img src="img/isaac.png" alt="Arte del Mod para The Binding of Isaac">
+        </figure>
+
+        <aside class="tarjeta sidebar">
+            <span class="etiqueta">ACTIVIDADES</span>
+            <h3>Intereses</h3>
+            <ul class="lista-intereses">
+                <li><span class="texto-bold">Desarrollo Web:</span> HTML, CSS y JS.</li>
+                <li><span class="texto-bold">Diseño Gráfico:</span> Edición de sprites para TBOI.</li>
+                <li><span class="texto-bold">Desarrollo en LUA:</span> Mecánicas y diseño de mods.</li>
+            </ul>
+        </aside>
+
+        <section class="tarjeta showcase">
+            <span class="etiqueta">LABORATORIO</span>
+            <h3>Proyectos Personales</h3>
+            <div class="enlaces-proyectos">
+                <article class="proyecto-item">
+                    <p><span class="texto-bold">D6-Simulator:</span> Simulador en JS.</p>
+                    <a href="https://thed6.pages.dev/" class="boton">Acceder</a>
+                </article>
+                <article class="proyecto-item">
+                    <p><span class="texto-bold">Mod TBOI:</span> Personaje "Hitman".</p>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3682371843" class="boton">Acceder</a>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer class="tarjeta footer-contacto contenido-footer">
+        <span class="etiqueta">CONTACTO</span>
+        <h3>¿Trabajamos juntos?</h3>
+        <p>Si tienes alguna propuesta, proyecto en mente o simplemente quieres saludar, ¡no dudes en escribirme!</p>
+        <a href="mailto:corraal15@gmail.com" class="boton boton-contacto">corraal15@gmail.com</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,269 @@
+/* Colores por defecto (modo claro) */
+:root {
+    --color-primario: #2563eb;
+    --color-oscuro: #1d4ed8;
+    --fondo: #f8fafc;
+    --superficie: #ffffff;
+    --texto-principal: #1e293b;
+    --texto-secundario: #475569;
+    --borde: #e2e8f0;
+    --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Modo oscuro usando el truco del checkbox */
+body:has(.checkbox-tema:checked) {
+    --color-primario: #60a5fa;
+    --color-oscuro: #3b82f6;
+    --fondo: #0f172a;
+    --superficie: #1e293b;
+    --texto-principal: #f8fafc;
+    --texto-secundario: #94a3b8;
+    --borde: #334155;
+    --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* Transiciones para que el cambio de tema no sea de golpe */
+body, .tarjeta, .texto-bold, .texto-cita, .etiqueta, .linea-decorativa, .proyecto-item {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+/* Estilos base de la página */
+body {
+    background-color: var(--fondo);
+    color: var(--texto-principal);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Cabecera y botón del tema */
+.cabecera-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--borde);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    
+    /* Que la cabecera también tenga animación al cargar */
+    opacity: 0;
+    animation: aparecer 0.6s ease-out forwards;
+}
+
+/* Cambiamos el texto del botón según si está marcado o no */
+.label-tema::after {
+    color: white;
+    content: "Modo Oscuro";
+    cursor: pointer;
+}
+
+body:has(.checkbox-tema:checked) .label-tema::after {
+    color: black;
+    content: "Modo Claro";
+}
+
+/* Estructura principal del portfolio */
+.contenedor-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+        "hero hero media side"
+        "widget banner banner side"
+        "main main main main";
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Nombres de las zonas del grid */
+.hero { grid-area: hero; }
+.media-stack { grid-area: media; }
+.widget-filosofia { grid-area: widget; }
+.banner { grid-area: banner; }
+.sidebar { grid-area: side; }
+.showcase { grid-area: main; }
+
+/* Diseño general de las tarjetas */
+.tarjeta {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--sombra);
+    
+    /* Preparamos la tarjeta para la animación de entrada */
+    opacity: 0;
+    animation: aparecer 0.6s ease-out forwards;
+
+    /* Efecto al pasar el ratón */
+    &:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-primario);
+    }
+
+    /* Ajuste de imágenes dentro de las tarjetas */
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        display: block;
+    }
+}
+
+/* Efecto cascada: hacemos que cada tarjeta tarde un poquito más en salir */
+.tarjeta:nth-child(1) { animation-delay: 0.1s; }
+.tarjeta:nth-child(2) { animation-delay: 0.2s; }
+.tarjeta:nth-child(3) { animation-delay: 0.3s; }
+.tarjeta:nth-child(4) { animation-delay: 0.4s; }
+.tarjeta:nth-child(5) { animation-delay: 0.5s; }
+.tarjeta:nth-child(6) { animation-delay: 0.6s; }
+
+/* La animación para que las cosas aparezcan desde abajo */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Detalles específicos de algunas tarjetas */
+.widget-filosofia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    & .texto-cita {
+        font-style: italic;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        color: var(--texto-principal);
+    }
+}
+
+.texto-bold {
+    font-weight: 700;
+    color: var(--texto-principal);
+}
+
+/* Sección de proyectos (Laboratorio) */
+.enlaces-proyectos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+
+    & .proyecto-item {
+        flex: 1;
+        padding: 15px;
+        border-left: 4px solid var(--borde);
+
+        &:hover {
+            border-left-color: var(--color-primario);
+        }
+    }
+}
+
+/* Adornos y utilidades varias */
+.etiqueta {
+    color: var(--color-primario);
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.linea-decorativa {
+    width: 30px;
+    height: 3px;
+    background: var(--color-primario);
+    margin-bottom: 10px;
+}
+
+/* Estilo de los botones */
+.boton {
+    display: inline-block;
+    background: var(--color-primario);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+    border: none;
+
+    &:hover {
+        background: var(--color-oscuro);
+    }
+}
+
+.lista-intereses {
+    list-style: none;
+    padding: 0;
+}
+
+/* Estilos del footer de contacto */
+.footer-contacto {
+    margin: 20px auto 0 auto; /* Lo separa del grid principal y lo centra */
+    max-width: 1055px; /* Mantiene el mismo ancho máximo que el grid */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    animation-delay: 0.7s; /* Continúa el efecto cascada después de la 6ª tarjeta */
+}
+
+.contenido-footer h3 {
+    margin: 5px 0 15px 0;
+}
+
+.contenido-footer p {
+    margin-bottom: 20px;
+    color: var(--texto-secundario);
+}
+
+.boton-contacto {
+    font-size: 1rem;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Adaptación a pantallas más pequeñas */
+@media (max-width: 900px) {
+    .contenedor-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "hero hero" 
+            "media widget" 
+            "banner banner" 
+            "side main";
+    }
+}
+
+@media (max-width: 650px) {
+    .contenedor-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "hero" "media" "widget" "banner" "side" "main";
+    }
+    
+    .enlaces-proyectos {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cabecera-principal {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
