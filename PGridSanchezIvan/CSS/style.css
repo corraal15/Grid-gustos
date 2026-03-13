@@ -1,4 +1,4 @@
-/* Colores por defecto (modo claro) */
+/* Define las variables de color y estilos globales para el tema claro */
 :root {
     --color-primario: #2563eb;
     --color-oscuro: #1d4ed8;
@@ -10,7 +10,7 @@
     --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Modo oscuro usando el truco del checkbox */
+/* Sobrescribe las variables de color cuando el checkbox de tema está marcado (Modo Oscuro) */
 body:has(.checkbox-tema:checked) {
     --color-primario: #60a5fa;
     --color-oscuro: #3b82f6;
@@ -22,12 +22,12 @@ body:has(.checkbox-tema:checked) {
     --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
-/* Transiciones para que el cambio de tema no sea de golpe */
+/* Suaviza el cambio de colores y transformaciones en los elementos principales */
 body, .tarjeta, .texto-bold, .texto-cita, .etiqueta, .linea-decorativa, .proyecto-item {
     transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
 }
 
-/* Estilos base de la página */
+/* Configura el fondo, la fuente predeterminada y el espaciado base del documento */
 body {
     background-color: var(--fondo);
     color: var(--texto-principal);
@@ -37,7 +37,7 @@ body {
     line-height: 1.6;
 }
 
-/* Cabecera y botón del tema */
+/* Distribuye el título y el botón de tema en la parte superior con una animación de entrada */
 .cabecera-principal {
     display: flex;
     justify-content: space-between;
@@ -45,25 +45,24 @@ body {
     border-bottom: 2px solid var(--borde);
     margin-bottom: 30px;
     padding-bottom: 15px;
-    
-    /* Que la cabecera también tenga animación al cargar */
     opacity: 0;
     animation: aparecer 0.6s ease-out forwards;
 }
 
-/* Cambiamos el texto del botón según si está marcado o no */
+/* Establece el texto "Modo Oscuro" para el botón cuando el sitio está en modo claro */
 .label-tema::after {
     color: white;
     content: "Modo Oscuro";
     cursor: pointer;
 }
 
+/* Cambia el texto del botón a "Modo Claro" y ajusta su color cuando el checkbox está activo */
 body:has(.checkbox-tema:checked) .label-tema::after {
     color: black;
     content: "Modo Claro";
 }
 
-/* Estructura principal del portfolio */
+/* Define la cuadrícula principal (Grid) y las áreas donde se colocarán las secciones */
 .contenedor-grid {
     display: grid;
     gap: 20px;
@@ -76,7 +75,7 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     margin: 0 auto;
 }
 
-/* Nombres de las zonas del grid */
+/* Asigna cada sección del HTML a su área correspondiente en el Grid */
 .hero { grid-area: hero; }
 .media-stack { grid-area: media; }
 .widget-filosofia { grid-area: widget; }
@@ -84,35 +83,33 @@ body:has(.checkbox-tema:checked) .label-tema::after {
 .sidebar { grid-area: side; }
 .showcase { grid-area: main; }
 
-/* Diseño general de las tarjetas */
+/* Aplica el estilo visual de "tarjeta" (fondo, bordes, sombras) y la animación de aparición */
 .tarjeta {
     background: var(--superficie);
     border: 1px solid var(--borde);
     border-radius: 20px;
     padding: 20px;
     box-shadow: var(--sombra);
-    
-    /* Preparamos la tarjeta para la animación de entrada */
     opacity: 0;
     animation: aparecer 0.6s ease-out forwards;
-
-    /* Efecto al pasar el ratón */
-    &:hover {
-        transform: translateY(-5px);
-        border-color: var(--color-primario);
-    }
-
-    /* Ajuste de imágenes dentro de las tarjetas */
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 20px;
-        display: block;
-    }
 }
 
-/* Efecto cascada: hacemos que cada tarjeta tarde un poquito más en salir */
+/* Eleva la tarjeta y cambia el color del borde cuando el usuario pasa el cursor por encima */
+.tarjeta:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primario);
+}
+
+/* Asegura que las imágenes dentro de las tarjetas cubran su espacio y tengan bordes redondeados */
+.tarjeta img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+/* Crea un retraso escalonado en la animación de cada tarjeta para un efecto visual de cascada */
 .tarjeta:nth-child(1) { animation-delay: 0.1s; }
 .tarjeta:nth-child(2) { animation-delay: 0.2s; }
 .tarjeta:nth-child(3) { animation-delay: 0.3s; }
@@ -120,7 +117,7 @@ body:has(.checkbox-tema:checked) .label-tema::after {
 .tarjeta:nth-child(5) { animation-delay: 0.5s; }
 .tarjeta:nth-child(6) { animation-delay: 0.6s; }
 
-/* La animación para que las cosas aparezcan desde abajo */
+/* Define la animación que mueve los elementos hacia arriba mientras pasan de transparentes a opacos */
 @keyframes aparecer {
     from {
         opacity: 0;
@@ -132,46 +129,50 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     }
 }
 
-/* Detalles específicos de algunas tarjetas */
+/* Centra el contenido de la tarjeta de filosofía y aplica estilos de cita al texto */
 .widget-filosofia {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-
-    & .texto-cita {
-        font-style: italic;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: var(--texto-principal);
-    }
 }
 
+/* Estiliza el texto de la cita dentro de la sección de filosofía */
+.widget-filosofia .texto-cita {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--texto-principal);
+}
+
+/* Estilo para resaltar textos importantes en negrita */
 .texto-bold {
     font-weight: 700;
     color: var(--texto-principal);
 }
 
-/* Sección de proyectos (Laboratorio) */
+/* Alinea los bloques de proyectos de forma horizontal con espacio entre ellos */
 .enlaces-proyectos {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 30px;
     margin-top: 20px;
-
-    & .proyecto-item {
-        flex: 1;
-        padding: 15px;
-        border-left: 4px solid var(--borde);
-
-        &:hover {
-            border-left-color: var(--color-primario);
-        }
-    }
 }
 
-/* Adornos y utilidades varias */
+/* Estiliza cada ítem de proyecto con un borde lateral decorativo */
+.enlaces-proyectos .proyecto-item {
+    flex: 1;
+    padding: 15px;
+    border-left: 4px solid var(--borde);
+}
+
+/* Resalta el borde lateral del proyecto cuando se pasa el cursor */
+.enlaces-proyectos .proyecto-item:hover {
+    border-left-color: var(--color-primario);
+}
+
+/* Estilo para los subtítulos pequeños de categorías en la parte superior de las tarjetas */
 .etiqueta {
     color: var(--color-primario);
     font-size: 0.7rem;
@@ -181,6 +182,7 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     display: block;
 }
 
+/* Crea una pequeña barra horizontal de color para decorar las secciones */
 .linea-decorativa {
     width: 30px;
     height: 3px;
@@ -188,7 +190,7 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     margin-bottom: 10px;
 }
 
-/* Estilo de los botones */
+/* Estilo base para los botones de acción (colores, bordes y espaciado) */
 .boton {
     display: inline-block;
     background: var(--color-primario);
@@ -199,46 +201,51 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     font-size: 0.85rem;
     transition: background 0.2s;
     border: none;
-
-    &:hover {
-        background: var(--color-oscuro);
-    }
 }
 
+/* Cambia el fondo del botón a un tono más oscuro al pasar el ratón */
+.boton:hover {
+    background: var(--color-oscuro);
+}
+
+/* Quita los puntos de la lista de intereses y limpia el padding */
 .lista-intereses {
     list-style: none;
     padding: 0;
 }
 
-/* Estilos del footer de contacto */
+/* Configura el contenedor del pie de página para que esté centrado y respete el ancho del grid */
 .footer-contacto {
-    margin: 20px auto 0 auto; /* Lo separa del grid principal y lo centra */
-    max-width: 1055px; /* Mantiene el mismo ancho máximo que el grid */
+    margin: 20px auto 0 auto;
+    max-width: 1055px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 30px 20px;
-    animation-delay: 0.7s; /* Continúa el efecto cascada después de la 6ª tarjeta */
+    animation-delay: 0.7s;
 }
 
+/* Ajusta el margen superior e inferior del título del footer */
 .contenido-footer h3 {
     margin: 5px 0 15px 0;
 }
 
+/* Da color secundario al texto descriptivo del footer */
 .contenido-footer p {
     margin-bottom: 20px;
     color: var(--texto-secundario);
 }
 
+/* Aumenta el tamaño y resalta el botón de contacto específico */
 .boton-contacto {
     font-size: 1rem;
     padding: 10px 20px;
     font-weight: bold;
 }
 
-/* Adaptación a pantallas más pequeñas */
+/* Media Query: Reorganiza el grid a 2 columnas para tablets o pantallas medianas */
 @media (max-width: 900px) {
     .contenedor-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -250,6 +257,7 @@ body:has(.checkbox-tema:checked) .label-tema::after {
     }
 }
 
+/* Media Query: Reorganiza el contenido en una sola columna para móviles y ajusta la cabecera */
 @media (max-width: 650px) {
     .contenedor-grid {
         grid-template-columns: 1fr;
